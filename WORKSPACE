@@ -100,6 +100,13 @@ container_pull(
 )
 
 container_pull(
+    name = "fedora-aarch64",
+    registry = "quay.io",
+    repository = "fedora/fedora",
+    tag = "32-aarch64",
+)
+
+container_pull(
     name = "fedora-docker",
     digest = "sha256:d3d106e8f3affb1011b97c2b6ef388430dc1474bf7c7ad05963cff49961edb89",
     registry = "index.docker.io",
@@ -127,11 +134,25 @@ http_file(
 )
 
 http_file(
+    name = "qemu-img-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/q/qemu-img-4.2.1-1.fc32.aarch64.rpm"
+    ],
+)
+
+http_file(
     name = "qemu-block-curl",
     sha256 = "084f4df7971c7a624996cf05f43ff60ff1a19fdc7800e338519826edaab3811d",
     urls = [
         "http://download.fedoraproject.org/pub/fedora/linux/updates/31/Everything/x86_64/Packages/q/qemu-block-curl-4.1.1-1.fc31.x86_64.rpm",
         "https://storage.googleapis.com/builddeps/084f4df7971c7a624996cf05f43ff60ff1a19fdc7800e338519826edaab3811d",
+    ],
+)
+
+http_file(
+    name = "qemu-block-curl-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/q/qemu-block-curl-4.2.1-1.fc32.aarch64.rpm",
     ],
 )
 
@@ -154,6 +175,13 @@ http_file(
 )
 
 http_file(
+    name = "xen-libs-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/x/xen-libs-4.13.3-1.fc32.aarch64.rpm",
+    ],
+)
+
+http_file(
     name = "libaio",
     sha256 = "ee6596a5010c2b4a038861828ecca240aa03c592dacd83c3a70d44cb8ee50408",
     urls = [
@@ -163,11 +191,25 @@ http_file(
 )
 
 http_file(
+    name = "libaio-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/32/Everything/aarch64/os/Packages/l/libaio-0.3.111-7.fc32.aarch64.rpm",
+    ],
+)
+
+http_file(
     name = "capstone",
     sha256 = "4d2671bc78b11650e8ccf75926e34295c641433759eab8f8932b8403bfa15319",
     urls = [
         "http://download.fedoraproject.org/pub/fedora/linux/releases/31/Everything/x86_64/os/Packages/c/capstone-4.0.1-4.fc31.x86_64.rpm",
         "https://storage.googleapis.com/builddeps/4d2671bc78b11650e8ccf75926e34295c641433759eab8f8932b8403bfa15319",
+    ],
+)
+
+http_file(
+    name = "capstone-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/c/capstone-4.0.2-2.fc32.aarch64.rpm",
     ],
 )
 
@@ -226,6 +268,13 @@ http_file(
 )
 
 http_file(
+    name = "containers-common-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/c/containers-common-1.2.0-13.fc32.aarch64.rpm",
+    ],
+)
+
+http_file(
     name = "tar",
     sha256 = "9975496f29601a1c2cdb89e63aac698fdd8283ba3a52a9d91ead9473a0e064c8",
     urls = [
@@ -240,6 +289,13 @@ http_file(
     urls = [
         "http://download.fedoraproject.org/pub/fedora/linux/releases/31/Everything/x86_64/os/Packages/o/ostree-libs-2019.4-3.fc31.x86_64.rpm",
         "https://storage.googleapis.com/builddeps/4011ad8b367db9d528d47202d07c287a958d4bd11a56b11618818dcb3be55bc6",
+    ],
+)
+
+http_file(
+    name = "ostree-libs-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/o/ostree-libs-2020.8-1.fc32.aarch64.rpm",
     ],
 )
 
@@ -554,6 +610,13 @@ http_file(
 )
 
 http_file(
+    name = "nbdkit-server-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/n/nbdkit-server-1.20.7-1.fc32.aarch64.rpm",
+    ],
+)
+
+http_file(
     name = "nbdkit-vddk-plugin",
     sha256 = "b9b2eb86b0f8d8355be6a1ef42107526aa7f7d35e5b31af7441750e6b770e9b4",
     urls = [
@@ -570,6 +633,13 @@ http_file(
         "https://download.fedoraproject.org/pub/fedora/linux/updates/31/Everything/x86_64/Packages/l/libxcrypt-compat-4.4.17-1.fc31.x86_64.rpm",
         "https://mirror.isoc.org.il/pub/fedora/updates/31/Everything/x86_64/Packages/l/libxcrypt-compat-4.4.17-1.fc31.x86_64.rpm",
         "https://storage.googleapis.com/builddeps/de561ae2ce6394c9b77d5002a52bd9ee9ffea642ffea39bd8fb84d21dce0825c",
+    ],
+)
+
+http_file(
+    name = "libxcrypt-compat-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/l/libxcrypt-compat-4.4.20-2.fc32.aarch64.rpm",
     ],
 )
 
@@ -620,5 +690,12 @@ http_file(
         "http://download.fedoraproject.org/pub/fedora/linux/updates/31/Everything/x86_64/Packages/l/libnbd-1.4.1-1.fc31.x86_64.rpm",
         "https://mirror.isoc.org.il/pub/fedora/updates/31/Everything/x86_64/Packages/l/libnbd-1.4.1-1.fc31.x86_64.rpm",
         "https://storage.googleapis.com/builddeps/f77f5dc88066d67b665440afafeab69e928a088ddba94d28955c368844a6bfad",
+    ],
+)
+
+http_file(
+    name = "libnbd-aarch64",
+    urls = [
+        "https://mirrors.tuna.tsinghua.edu.cn/fedora/updates/32/Everything/aarch64/Packages/l/libnbd-1.6.2-1.fc32.aarch64.rpm",
     ],
 )

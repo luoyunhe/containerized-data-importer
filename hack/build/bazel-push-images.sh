@@ -33,17 +33,17 @@ for target in ${PUSH_TARGETS[@]}; do
     echo "Pushing: $target"
     bazel run \
         --verbose_failures \
-        --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64_cgo \
+        --config=${ARCHITECTURE} \
         --define container_prefix=${DOCKER_PREFIX} \
         --define container_tag=${DOCKER_TAG} \
         --host_force_python=PY3 \
         //:push-${target}
 done
 
-bazel run \
-    --verbose_failures \
-    --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64_cgo \
-    --define container_prefix=${DOCKER_PREFIX} \
-    --define container_tag=${DOCKER_TAG} \
-    --host_force_python=PY3 \
-    //:push-test-images
+# bazel run \
+#     --verbose_failures \
+#     --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64_cgo \
+#     --define container_prefix=${DOCKER_PREFIX} \
+#     --define container_tag=${DOCKER_TAG} \
+#     --host_force_python=PY3 \
+#     //:push-test-images

@@ -60,12 +60,6 @@ func main() {
 	filesystemOverhead, _ := strconv.ParseFloat(os.Getenv(common.FilesystemOverheadVar), 64)
 	insecureTLS, _ := strconv.ParseBool(os.Getenv(common.InsecureTLSVar))
 	diskID, _ := util.ParseEnvVar(common.ImporterDiskID, false)
-	uuid, _ := util.ParseEnvVar(common.ImporterUUID, false)
-	backingFile, _ := util.ParseEnvVar(common.ImporterBackingFile, false)
-	thumbprint, _ := util.ParseEnvVar(common.ImporterThumbprint, false)
-	currentCheckpoint, _ := util.ParseEnvVar(common.ImporterCurrentCheckpoint, false)
-	previousCheckpoint, _ := util.ParseEnvVar(common.ImporterPreviousCheckpoint, false)
-	finalCheckpoint, _ := util.ParseEnvVar(common.ImporterFinalCheckpoint, false)
 	preallocation, err := strconv.ParseBool(os.Getenv(common.Preallocation))
 	var preallocationApplied bool
 	var dp importer.DataSourceInterface
@@ -161,16 +155,6 @@ func main() {
 			if err != nil {
 				klog.Errorf("%+v", err)
 				err = util.WriteTerminationMessage(fmt.Sprintf("Unable to connect to s3 data source: %+v", err))
-				if err != nil {
-					klog.Errorf("%+v", err)
-				}
-				os.Exit(1)
-			}
-		case controller.SourceVDDK:
-			dp, err = importer.NewVDDKDataSource(ep, acc, sec, thumbprint, uuid, backingFile, currentCheckpoint, previousCheckpoint, finalCheckpoint, volumeMode)
-			if err != nil {
-				klog.Errorf("%+v", err)
-				err = util.WriteTerminationMessage(fmt.Sprintf("Unable to connect to vddk data source: %+v", err))
 				if err != nil {
 					klog.Errorf("%+v", err)
 				}

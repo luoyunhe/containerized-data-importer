@@ -32,6 +32,10 @@ else
 	DO=eval
 	DO_BAZ=eval
 endif
+# x86_64 aarch64
+BUILD_ARCH?=x86_64
+DOCKER_TAG?=v1.34.1-aarch64
+DOCKER_PREFIX?="harbor-dev.eecos.cn:1443/ecf"
 
 all: manifests bazel-build-images
 
@@ -119,22 +123,22 @@ cluster-sync-test-infra: cluster-clean-test-infra
 cluster-sync: cluster-sync-cdi cluster-sync-test-infra
 
 bazel-generate:
-	${DO_BAZ} "./hack/build/bazel-generate.sh -- pkg/ tools/ tests/ cmd/ vendor/"
+	${DO_BAZ} "BUILD_ARCH=${BUILD_ARCH} ./hack/build/bazel-generate.sh -- pkg/ tools/ tests/ cmd/ vendor/"
 
 bazel-cdi-generate:
 	${DO_BAZ} "./hack/build/bazel-generate.sh -- pkg/ tools/ tests/ cmd/"
 
 bazel-build:
-	${DO_BAZ} "./hack/build/bazel-build.sh"
+	${DO_BAZ} "BUILD_ARCH=${BUILD_ARCH} ./hack/build/bazel-build.sh"
 
 gosec:
 	${DO_BAZ} "GOSEC=${GOSEC} ./hack/build/gosec.sh"
 
 bazel-build-images:	bazel-cdi-generate bazel-build
-	${DO_BAZ} "DOCKER_PREFIX=${DOCKER_PREFIX} DOCKER_TAG=${DOCKER_TAG} ./hack/build/bazel-build-images.sh"
+	${DO_BAZ} "BUILD_ARCH=${BUILD_ARCH} DOCKER_PREFIX=${DOCKER_PREFIX} DOCKER_TAG=${DOCKER_TAG} ./hack/build/bazel-build-images.sh"
 
 bazel-push-images: bazel-cdi-generate bazel-build
-	${DO_BAZ} "DOCKER_PREFIX=${DOCKER_PREFIX} DOCKER_TAG=${DOCKER_TAG} DOCKER_CA_CERT_FILE=${DOCKER_CA_CERT_FILE} ./hack/build/bazel-push-images.sh"
+	${DO_BAZ} "BUILD_ARCH=${BUILD_ARCH} DOCKER_PREFIX=${DOCKER_PREFIX} DOCKER_TAG=${DOCKER_TAG} DOCKER_CA_CERT_FILE=${DOCKER_CA_CERT_FILE} ./hack/build/bazel-push-images.sh"
 
 push: bazel-push-images
 

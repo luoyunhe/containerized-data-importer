@@ -27,9 +27,9 @@ docker_tag=$DOCKER_TAG
 for tag in ${docker_tag}; do
     bazel build \
         --verbose_failures \
-        --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64_cgo \
+        --config=${ARCHITECTURE} \
         --define container_prefix=${docker_prefix} \
         --define container_tag=${tag} \
         --host_force_python=PY3 \
-        //:test-container-images //cmd/cdi-operator:cdi-operator-image //cmd/cdi-controller:cdi-controller-image //cmd/cdi-apiserver:cdi-apiserver-image //cmd/cdi-cloner:cdi-cloner-image //cmd/cdi-importer:cdi-importer-image //cmd/cdi-uploadproxy:cdi-uploadproxy-image //cmd/cdi-uploadserver:cdi-uploadserver-image
+        //cmd/cdi-operator:cdi-operator-image //cmd/cdi-controller:cdi-controller-image //cmd/cdi-apiserver:cdi-apiserver-image //cmd/cdi-cloner:cdi-cloner-image //cmd/cdi-importer:cdi-importer-image //cmd/cdi-uploadproxy:cdi-uploadproxy-image //cmd/cdi-uploadserver:cdi-uploadserver-image
 done
